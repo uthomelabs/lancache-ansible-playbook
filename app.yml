@@ -1,0 +1,9 @@
+---
+- hosts:
+    - lancache-server
+  become: true
+  become_user: root
+  roles:
+    - role: common
+    - role: docker
+    - role: lancache

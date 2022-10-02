@@ -1,0 +1,68 @@
+- name: Install ca-certificates
+  apt:
+    pkg: ca-certificates
+    state: present
+    update_cache: true
+  become: yes
+
+- name: Install curl
+  apt:
+    pkg: curl
+    state: present
+    update_cache: true
+  become: yes
+
+- name: Install gnupg
+  apt:
+    pkg: gnupg
+    state: present
+    update_cache: true
+  become: yes
+
+- name: Install lsb-release
+  apt:
+    pkg: lsb-release
+    state: present
+    update_cache: true
+  become: yes
+
+- name: Add Docker GPG apt Key
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+- name: Add Docker Repository
+  apt_repository:
+    repo: deb https://download.docker.com/linux/ubuntu {{ubuntu_release}} stable
+    state: present
+
+- name: Install docker-ce
+  apt:
+    name: docker-ce
+    state: latest
+    update_cache: true
+
+- name: Install docker-ce-cli
+  apt:
+    name: docker-ce-cli
+    state: latest
+    update_cache: true
+
+- name: Install containerd.io
+  apt:
+    name: containerd.io
+    state: latest
+    update_cache: true
+
+- name: Install docker-compose-plugin
+  apt:
+    name: docker-compose-plugin
+    state: latest
+    update_cache: true
+
+- name: Enable docker service
+  systemd:
+    state: started
+    enabled: yes
+    daemon_reload: yes
+    name: docker

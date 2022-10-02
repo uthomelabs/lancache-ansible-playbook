@@ -1,0 +1,53 @@
+---
+- name: Clone the repo
+  ansible.builtin.git:
+    repo: https://github.com/lancachenet/docker-compose.git
+    dest: /home/{{ ansible_ssh_user }}/lancache
+    update: true
+    force: true
+
+- name: Update .env - LANCACHE_IP
+  ansible.builtin.lineinfile:
+    path: /home/{{ ansible_ssh_user }}/lancache/.env
+    regexp: '^LANCACHE_IP='
+    line: LANCACHE_IP={{lancache_ip}}
+
+- name: Update .env - DNS_BIND_IP
+  ansible.builtin.lineinfile:
+    path: /home/{{ ansible_ssh_user }}/lancache/.env
+    regexp: '^DNS_BIND_IP='
+    line: DNS_BIND_IP={{lancache_ip}}
+
+- name: Update .env - UPSTREAM_DNS
+  ansible.builtin.lineinfile:
+    path: /home/{{ ansible_ssh_user }}/lancache/.env
+    regexp: '^UPSTREAM_DNS='
+    line: UPSTREAM_DNS=8.8.8.8
+
+- name: Update .env - CACHE_DISK_SIZE
+  ansible.builtin.lineinfile:
+    path: /home/{{ ansible_ssh_user }}/lancache/.env
+    regexp: '^CACHE_DISK_SIZE='
+    line: CACHE_DISK_SIZE={{cache_disk_size}}
+
+- name: Update .env - TZ
+  ansible.builtin.lineinfile:
+    path: /home/{{ ansible_ssh_user }}/lancache/.env
+    regexp: '^TZ='
+    line: TZ=America/Denver
+
+- name: Copy lancache service
+  template:
+    src: systemd/lancache.service
+    dest: /etc/systemd/system/lancache.service
+    owner: root
+    group: root
+    mode: u=rw,g=r,o=r
+  become: yes
+
+- name: Enable lancache service
+  systemd:
+    state: started
+    enabled: yes
+    daemon_reload: yes
+    name: lancache

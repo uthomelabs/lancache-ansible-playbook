@@ -1,0 +1,8 @@
+[lancache-server]
+192.168.42.110
+
+[lancache-server:vars]
+ansible_ssh_user=ubuntu
+cache_disk_size=1000m
+lancache_ip=192.168.42.110
+ubuntu_release=focal
