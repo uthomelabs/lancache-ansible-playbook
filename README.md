@@ -15,5 +15,5 @@ pip install ansible
 
 ## Apply playbook with the following:
 ```
-ansible-playbook -i inventory/all -v playbooks/app.yml --ask-become-pass
+ansible-playbook -i inventory/all -v app.yml --ask-become-pass
 ```
