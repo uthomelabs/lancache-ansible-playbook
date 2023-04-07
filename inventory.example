@@ -1,0 +1,9 @@
+[lancache-server]
+192.168.42.20
+
+[lancache-server:vars]
+ansible_ssh_user=ubuntu
+cache_disk_size=7300000m
+cache_root=/mnt/lancache_storage
+lancache_ip=192.168.42.20
+ubuntu_release=jammy

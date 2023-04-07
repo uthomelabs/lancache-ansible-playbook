@@ -11,9 +11,15 @@ Ansible playbook for setting up a lancache VM
 pip install ansible
 ```
 
+## Copy Inventory
+Copy the inventory file example and change what you need
+```
+cp inventory{.example,}
+```
+
 # Run
 
 ## Apply playbook with the following:
 ```
-ansible-playbook -i inventory/all -v app.yml --ask-become-pass
+ansible-playbook app.yml --ask-become-pass
 ```
