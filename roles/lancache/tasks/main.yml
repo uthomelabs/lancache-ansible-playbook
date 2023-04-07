@@ -30,6 +30,12 @@
     regexp: '^CACHE_DISK_SIZE='
     line: CACHE_DISK_SIZE={{cache_disk_size}}
 
+- name: Update .env - CACHE_ROOT
+  ansible.builtin.lineinfile:
+    path: /home/{{ ansible_ssh_user }}/lancache/.env
+    regexp: '^CACHE_ROOT='
+    line: CACHE_ROOT={{cache_root}}
+
 - name: Update .env - TZ
   ansible.builtin.lineinfile:
     path: /home/{{ ansible_ssh_user }}/lancache/.env
