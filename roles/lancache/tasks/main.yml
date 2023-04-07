@@ -22,7 +22,7 @@
   ansible.builtin.lineinfile:
     path: /home/{{ ansible_ssh_user }}/lancache/.env
     regexp: '^UPSTREAM_DNS='
-    line: UPSTREAM_DNS=8.8.8.8
+    line: UPSTREAM_DNS={{upstream_dns}}
 
 - name: Update .env - CACHE_DISK_SIZE
   ansible.builtin.lineinfile:

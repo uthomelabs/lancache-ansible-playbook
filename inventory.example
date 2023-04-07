@@ -7,3 +7,4 @@ cache_disk_size=7300000m
 cache_root=/mnt/lancache_storage
 lancache_ip=192.168.42.20
 ubuntu_release=jammy
+upstream_dns=192.168.42.1
